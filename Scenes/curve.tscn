@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwvldrhynimrk"]
+
+[ext_resource type="Script" path="res://Scenes/curve.gd" id="1_mrvm4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5gx6n"]
+
+[node name="Curve" type="Node3D"]
+script = ExtResource("1_mrvm4")
+
+[node name="Sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("SphereMesh_5gx6n")
+
+[node name="Sphere2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("SphereMesh_5gx6n")
+skeleton = NodePath("../Sphere")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, -10, 0)

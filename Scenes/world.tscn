@@ -1,0 +1,115 @@
+[gd_scene load_steps=11 format=3 uid="uid://cgruwinpk2eju"]
+
+[ext_resource type="PackedScene" uid="uid://cr5s30usjqo7x" path="res://Scenes/player.tscn" id="1_rakor"]
+[ext_resource type="PackedScene" uid="uid://ce4j0v6n8xppy" path="res://Scenes/target.tscn" id="2_pk8gm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gcvqf"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_4ecti"]
+sky_material = SubResource("ProceduralSkyMaterial_gcvqf")
+
+[sub_resource type="Environment" id="Environment_af1le"]
+background_mode = 2
+sky = SubResource("Sky_4ecti")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ay3"]
+albedo_color = Color(0.592157, 0.85098, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qphx"]
+albedo_color = Color(1, 0.733333, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s48ib"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xa7dl"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03x84"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.364877, -0.624205, 0.690821, 0, 0.741976, 0.670427, -0.931056, 0.244623, -0.27073, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_af1le")
+
+[node name="Player" parent="." instance=ExtResource("1_rakor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133948, 1.49738, 0.0522931)
+
+[node name="Ground" type="CSGBox3D" parent="."]
+material_override = SubResource("StandardMaterial3D_s8ay3")
+use_collision = true
+collision_mask = 3
+size = Vector3(26, 0.1, 26)
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.770553, 12.4445)
+material_override = SubResource("StandardMaterial3D_6qphx")
+use_collision = true
+collision_mask = 3
+size = Vector3(25, 10, 0.1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.770553, -12.4353)
+material_override = SubResource("StandardMaterial3D_6qphx")
+use_collision = true
+collision_mask = 3
+size = Vector3(25, 10, 0.1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12.3798, -0.770553, 0.00569344)
+material_override = SubResource("StandardMaterial3D_6qphx")
+use_collision = true
+collision_mask = 3
+size = Vector3(25, 10, 0.1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.37, -0.770553, 0.00569344)
+material_override = SubResource("StandardMaterial3D_6qphx")
+use_collision = true
+collision_mask = 3
+size = Vector3(25, 10, 0.1)
+
+[node name="Boxes" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.83275, -0.14663, -5.99197)
+material_override = SubResource("StandardMaterial3D_s48ib")
+use_collision = true
+collision_mask = 3
+size = Vector3(2, 2, 2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.91793, 0.404819, 0.238006)
+material_override = SubResource("StandardMaterial3D_xa7dl")
+use_collision = true
+collision_mask = 3
+size = Vector3(3, 3, 3)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.68916, 0.943619, 6.45917)
+material_override = SubResource("StandardMaterial3D_03x84")
+use_collision = true
+collision_mask = 3
+size = Vector3(4, 4, 4)
+
+[node name="Targets" type="Node3D" parent="."]
+
+[node name="Target" parent="Targets" instance=ExtResource("2_pk8gm")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.7633, 1.81771, -9.64306)
+
+[node name="Target3" parent="Targets" instance=ExtResource("2_pk8gm")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.7633, 1.81771, -3.45444)
+
+[node name="Target2" parent="Targets" instance=ExtResource("2_pk8gm")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.7633, 1.81771, 9.00633)
+
+[node name="Target4" parent="Targets" instance=ExtResource("2_pk8gm")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.7633, 1.81771, 2.96453)

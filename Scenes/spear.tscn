@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://daeib78isulqh"]
+
+[ext_resource type="Script" path="res://Scripts/spear.gd" id="1_pup1y"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_64rjg"]
+top_radius = 0.05
+bottom_radius = 0.0
+height = 2.3
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lg1xu"]
+points = PackedVector3Array(0.0585714, 1.00571, 0.0242835, -0.0557143, 0.765705, -0.00999328, -0.0557143, 0.765705, 0.0128504, -0.00999328, -1.00571, -0.00999328, 0.0242835, 1.00571, -0.0557143, -0.0214263, 1.00571, 0.0585714, 0.0128504, -0.925383, 0.0128504, -0.0328482, 1.00571, -0.0557143, 0.0471384, 0.662535, -0.0328482, 0.0242835, 0.948222, 0.0585714, -0.00999328, -0.948222, 0.0128504, -0.0442812, 1.00571, 0.0471384, 0.0128504, -0.948222, -0.00999328, -0.0557143, 0.959839, -0.0328482, 0.0585714, 0.925383, -0.0214263, 0.0128504, 0.765705, -0.0557143, 0.0471384, 0.71983, 0.0357053, 0.0471384, 0.937, -0.0442812, 0.0585714, 0.879705, 0.0128504, -0.0557143, 0.845643, 0.0242835, -0.0214263, 0.811384, -0.0557143, -0.00999328, 0.879705, 0.0585714, 0.0128504, -0.605437, -0.0214263, -0.0214263, -0.605437, 0.0128504, -0.0442812, 0.845643, -0.0442812, 0.0242835, 0.845643, -0.0557143, -0.0442812, 0.937, 0.0471384, -0.0557143, 1.00571, 0.0242835, 0.0585714, 1.00571, -0.0214263, -0.0214263, 0.925383, 0.0585714, -0.0214263, -0.445562, -0.0214263, 0.0128504, 0.879705, 0.0585714)
+
+[node name="RigidBody3D" type="RigidBody3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+top_level = true
+collision_layer = 2
+freeze_mode = 1
+script = ExtResource("1_pup1y")
+speed = 30.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_64rjg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_lg1xu")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37374e-08, 0, -0.157137)
+target_position = Vector3(0, 0, -1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
